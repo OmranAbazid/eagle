@@ -174,8 +174,8 @@ export default {
       }
       if (touchendY == touchstartY) {
           alert('tap!');
-
-    }
+      }
+    },
     wheel: function (evt) {
       if (this.mouseNavigation && this.currentSlide.mouseNavigation) {
         evt.preventDefault()
