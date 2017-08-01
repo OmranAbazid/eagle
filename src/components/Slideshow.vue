@@ -52,7 +52,9 @@ export default {
         window.addEventListener('keydown', this.keydown)
       }
       if (this.mouseNavigation) {
-        window.addEventListener('click', this.click)
+        window.addEventListener('click', this.click);
+        window.addEventListener('touchstart', this.touchStart, false);
+        window.addEventListener('touchend', this.touchEnd, false);
         window.addEventListener('wheel', this.wheel)
       }
       if (this.embedded) {
@@ -150,6 +152,30 @@ export default {
 
       }
     },
+    touchStart: function(){
+      touchstartX = event.changedTouches[0].screenX;
+      touchstartY = event.changedTouches[0].screenY;
+    },
+    touchEnd: function(){
+      touchendX = event.changedTouches[0].screenX;
+      touchendY = event.changedTouches[0].screenY;
+      var swiped = 'swiped: ';
+      if (touchendX < touchstartX) {
+          alert(swiped + 'left!');
+      }
+      if (touchendX > touchstartX) {
+          alert(swiped + 'right!');
+      }
+      if (touchendY < touchstartY) {
+          alert(swiped + 'down!');
+      }
+      if (touchendY > touchstartY) {
+          alert(swiped + 'up!');
+      }
+      if (touchendY == touchstartY) {
+          alert('tap!');
+
+    }
     wheel: function (evt) {
       if (this.mouseNavigation && this.currentSlide.mouseNavigation) {
         evt.preventDefault()
